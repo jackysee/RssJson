@@ -3,10 +3,6 @@ var url = require('url');
 var Feed = require('./rss');
 
 var PORT = process.env.PORT || 8888;
-if(process.argv[2]){
-    PORT = parseInt(process.argv[2], 10);
-}
-
 
 function getFeedUrl(request){
     return url.parse(request.url, true).query.url;
