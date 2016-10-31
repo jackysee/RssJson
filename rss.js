@@ -42,7 +42,7 @@ module.exports = {
     },
     parser: function(json){
         var channel = json.rss.channel;
-        var rss = {items:[]};
+        var rss = {item:[]};
         if(util.isArray(json.rss.channel))
           channel = json.rss.channel[0];
 
@@ -90,7 +90,7 @@ module.exports = {
                 });
 
               }
-              rss.items.push(obj);
+              rss.item.push(obj);
 
            });
 
