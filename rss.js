@@ -66,8 +66,8 @@ module.exports = {
              obj.url = obj.link = !util.isNullOrUndefined(val.link)?val.link[0]:'';
 
              if (val.pubDate) {
-               //lets try basis js date parsing for now
-               obj.created = Date.parse(val.pubDate[0]);
+               //obj.created = Date.parse(val.pubDate[0]);
+               obj.pubDate = Date.parse(val.pubDate[0]);
              }
              if (val['media:content']) {
                obj.media = val.media || {};

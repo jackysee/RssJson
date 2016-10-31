@@ -2,7 +2,7 @@ var http = require('http');
 var url = require('url');
 var Feed = require('./rss');
 
-var PORT = process.env.PORT || 80;
+var PORT = process.env.PORT || 8888;
 if(process.argv[2]){
     PORT = parseInt(process.argv[2], 10);
 }
