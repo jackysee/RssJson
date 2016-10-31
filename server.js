@@ -8,31 +8,43 @@ function getFeedUrl(request){
     return url.parse(request.url, true).query.url;
 }
 
+function writeError(response){
+    response.writeHead(500, {
+        "Content-Type":"text/plain;charset=utf-8",
+        "Access-Control-Allow-Origin":"*"
+    });
+    response.write(err + "\n");
+    response.end();
+}
+
+function writeJsonResponse(rss, response){
+    response.writeHead(200, {
+        "Content-Type": "application/json;charset=utf-8",
+        "Access-Control-Allow-Origin":"*"
+    });
+    response.write(JSON.stringify(rss));
+    response.end();
+}
+
 function handleRequest(request, response){
     var feedUrl = getFeedUrl(request);
-    console.log('try getting feed ' + feedUrl);
+    var isHttps = /^https:/.test(feedUrl);
+    if(isHttps){
+        feedUrl = feedUrl.replace(/^https/, "http");
+        console.log('try connect to non-https:', feedUrl);
+    }
+    console.log('try connect to:', feedUrl);
     Feed.load(feedUrl, function(err, rss){
         if(err){
             console.log('error', err);
-            response.writeHead(500, {
-                "Content-Type":"text/plain;charset=utf-8",
-                "Access-Control-Allow-Origin":"*"
-            });
-            response.write(err + "\n");
-            response.end();
-            return;
+            writeError(response);
         }
         else{
-            response.writeHead(200, {
-                "Content-Type": "application/json;charset=utf-8",
-                "Access-Control-Allow-Origin":"*"
-            });
-            response.write(JSON.stringify(rss));
-            response.end();
-            return;
+            writeJsonResponse(rss, response);
         }
     });
 }
+
 
 var server = http.createServer(handleRequest);
 
