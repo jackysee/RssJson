@@ -6,6 +6,11 @@
 node server.js
 ```
 
-## Service
+## Request Usage
 
 e.g. http://localhost:8888/?url=https://rssfeedurl
+
+
+## Deploy to Heroku
+
+

@@ -1,0 +1,7 @@
+{
+    "name":"Rss to Json service",
+    "description":"Simple Rss to Json Service",
+    "respository":"https://github.com/jackysee/RssJson"
+    "keywords": ["rss", "json", "node"]
+}
+
