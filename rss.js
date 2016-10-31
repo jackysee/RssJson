@@ -6,6 +6,15 @@
       request = require('request');
 
 
+function copyEntry(obj){
+   var result = {};
+   for (var x in obj) {
+       result[x] = obj[x][0];
+   }
+   return result;
+}
+
+
 module.exports = {
     load: function(url, callback){
       var $ = this;
@@ -27,7 +36,6 @@ module.exports = {
                   parser.parseString(xml, function (err, result) {
                        var rss = $.parser(result);
                       callback(null, rss);
-                      //console.log(JSON.stringify(result.rss.channel));
                     });
                 }
                 else{
@@ -67,7 +75,7 @@ module.exports = {
 
              if (val.pubDate) {
                //obj.created = Date.parse(val.pubDate[0]);
-               obj.pubDate = Date.parse(val.pubDate[0]);
+               obj.pubDate = val.pubDate[0];
              }
              if (val['media:content']) {
                obj.media = val.media || {};
@@ -76,19 +84,23 @@ module.exports = {
              if (val['media:thumbnail']) {
                 obj.media = val.media || {};
                 obj.media.thumbnail = val['media:thumbnail'];
-              }
-              if(val.enclosure){
-                obj.enclosures = [];
-                if(!util.isArray(val.enclosure))
-                    val.enclosure = [val.enclosure];
-                val.enclosure.forEach(function(enclosure){
-                   var enc = {};
-                   for (var x in enclosure) {
-                       enc[x] = enclosure[x][0];
-                   }
-                  obj.enclosures.push(enc);
-                });
-
+             }
+             if (val['itunes:duration']){
+                 obj.duration = val['itunes:duration'][0];
+             }
+             if(val.enclosure){
+                if(!util.isArray(val.enclosure)){
+                    obj.enclosure = copyEntry(val.enclosure);
+                }
+                else if(val.enclosure.length == 1){
+                    obj.enclosure = copyEntry(val.enclosure[0]);
+                }
+                else{
+                    obj.enclosure = [];
+                    val.enclosure.forEach(function(enclosure){
+                      obj.enclosure.push(copyEntry(enclosure));
+                    });
+                }
               }
               rss.item.push(obj);
 

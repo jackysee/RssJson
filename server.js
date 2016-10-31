@@ -18,13 +18,19 @@ function handleRequest(request, response){
     Feed.load(feedUrl, function(err, rss){
         if(err){
             console.log('error', err);
-            response.writeHead(500, {"Content-Type":"text/plain"});
+            response.writeHead(500, {
+                "Content-Type":"text/plain;charset=utf-8",
+                "Access-Control-Allow-Origin":"*"
+            });
             response.write(err + "\n");
             response.end();
             return;
         }
         else{
-            response.writeHead(200, {"Content-Type": "Application/json"});
+            response.writeHead(200, {
+                "Content-Type": "application/json;charset=utf-8",
+                "Access-Control-Allow-Origin":"*"
+            });
             response.write(JSON.stringify(rss));
             response.end();
             return;
