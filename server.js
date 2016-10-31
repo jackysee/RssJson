@@ -2,7 +2,11 @@ var http = require('http');
 var url = require('url');
 var Feed = require('./rss');
 
-const PORT=8888
+var PORT = 80;
+if(process.argv[2]){
+    PORT = parseInt(process.argv[2], 10);
+}
+
 
 function getFeedUrl(request){
     return url.parse(request.url, true).query.url;
