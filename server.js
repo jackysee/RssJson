@@ -8,7 +8,7 @@ function getFeedUrl(request){
     return url.parse(request.url, true).query.url;
 }
 
-function writeError(response){
+function writeError(err, response){
     response.writeHead(500, {
         "Content-Type":"text/plain;charset=utf-8",
         "Access-Control-Allow-Origin":"*"
@@ -37,7 +37,7 @@ function handleRequest(request, response){
     Feed.load(feedUrl, function(err, rss){
         if(err){
             console.log('error', err);
-            writeError(response);
+            writeError(err, response);
         }
         else{
             writeJsonResponse(rss, response);
