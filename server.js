@@ -28,6 +28,10 @@ function writeJsonResponse(rss, response){
 
 function handleRequest(request, response){
     var feedUrl = getFeedUrl(request);
+    var hasHttp = /^http:\/\/|https:\/\//.test(feedUrl);
+    if(!hasHttp){
+        feedUrl = 'http://' + feedUrl
+    }
     var isHttps = /^https:/.test(feedUrl);
     if(isHttps){
         feedUrl = feedUrl.replace(/^https/, "http");
