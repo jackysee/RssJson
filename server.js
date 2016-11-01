@@ -50,7 +50,6 @@ function handleRequest(request, response){
     });
 }
 
-
 var server = http.createServer(handleRequest);
 
 server.listen(PORT, function(){
