@@ -71,11 +71,11 @@ module.exports = {
            }
            channel.item.forEach(function(val){
             
-             var content = content:encoded;
+             //var content = content:encoded;
              var obj = {};
              obj.title = !util.isNullOrUndefined(val.title)?val.title[0]:'';
              obj.description = !util.isNullOrUndefined(val.description)?val.description[0]:'';
-             obj.content = !util.isNullOrUndefined(val.content)?val.content[0]:'';
+             //obj.content = !util.isNullOrUndefined(val.content)?val.content[0]:'';
              obj.url = obj.link = !util.isNullOrUndefined(val.link)?val.link[0]:'';
 
              if (val.pubDate) {
