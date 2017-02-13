@@ -1,4 +1,3 @@
-
 // Invoke 'strict' JavaScript mode
 'use strict';
  var  util = require('util'),
