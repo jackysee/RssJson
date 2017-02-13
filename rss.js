@@ -21,7 +21,7 @@ module.exports = {
       request({
             url: url,
             headers: {
-              'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:45.0) Gecko/20100101 Firefox/45.0',
+              //'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:45.0) Gecko/20100101 Firefox/45.0',
               'accept': 'text/html,application/xhtml+xml'
               //'accept': '*/*'
             },
@@ -35,9 +35,15 @@ module.exports = {
                       callback(err, null);
                   });
                   parser.parseString(xml, function (err, result) {
-                       var rss = $.parser(result);
+                    if(err){
+                      callback(err, null);
+                      return;
+                    }
+                    else{
+                      var rss = $.parser(result);
                       callback(null, rss);
-                    });
+                    }
+                  });
                 }
                 else{
                   console.log("Error", error);
