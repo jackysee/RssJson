@@ -79,10 +79,10 @@ module.exports = {
              var obj = {};
              obj.title = !util.isNullOrUndefined(val.title)?val.title[0]:'';
              obj.description = !util.isNullOrUndefined(val.description)?val.description[0]:'';
-             // GC Add content:encoded
-             if (val['content:encoded']) {
-               obj.content = val['content:encoded'];
-             }
+             // GC Add content:encoded 
+             if (val['content:encoded']) { 
+               obj.content = val['content:encoded']; 
+             } 
              obj.url = obj.link = !util.isNullOrUndefined(val.link)?val.link[0]:'';
 
              if (val.pubDate) {
