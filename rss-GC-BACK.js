@@ -1,4 +1,3 @@
-
 // Invoke 'strict' JavaScript mode
 'use strict';
  var  util = require('util'),
@@ -21,7 +20,7 @@ module.exports = {
       request({
             url: url,
             headers: {
-              'User-Agent': 'RSS Reader',
+              'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:45.0) Gecko/20100101 Firefox/45.0',
               'accept': 'text/html,application/xhtml+xml'
               //'accept': '*/*'
             },
@@ -35,15 +34,9 @@ module.exports = {
                       callback(err, null);
                   });
                   parser.parseString(xml, function (err, result) {
-                    if(err){
-                      callback(err, null);
-                      return;
-                    }
-                    else{
-                      var rss = $.parser(result);
+                       var rss = $.parser(result);
                       callback(null, rss);
-                    }
-                  });
+                    });
                 }
                 else{
                   console.log("Error", error);
@@ -79,7 +72,6 @@ module.exports = {
              var obj = {};
              obj.title = !util.isNullOrUndefined(val.title)?val.title[0]:'';
              obj.description = !util.isNullOrUndefined(val.description)?val.description[0]:'';
-             // GC Add content:encoded
              if (val['content:encoded']) {
                obj.content = val['content:encoded'];
              }
@@ -88,9 +80,6 @@ module.exports = {
              if (val.pubDate) {
                //obj.created = Date.parse(val.pubDate[0]);
                obj.pubDate = val.pubDate[0];
-             }
-             if (val['content:encoded']) {
-               obj.content = val['content:encoded'];
              }
              if (val['media:content']) {
                obj.media = val.media || {};
