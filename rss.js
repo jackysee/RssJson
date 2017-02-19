@@ -57,6 +57,10 @@ module.exports = {
 
     },
     parser: function(json){
+        if(!json.rss){
+          //just return for other format
+          return json;
+        }
         var channel = json.rss.channel;
         var rss = {item:[]};
         if(util.isArray(json.rss.channel))
