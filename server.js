@@ -13,8 +13,9 @@ function writeError(err, response){
         "Content-Type":"text/plain;charset=utf-8",
         "Access-Control-Allow-Origin":"*"
     });
-    response.write(err + "\n");
-    response.end();
+    response.write(err + "\n", function(){
+       response.end(); 
+    });
 }
 
 function writeJsonResponse(rss, response){
@@ -55,3 +56,4 @@ var server = http.createServer(handleRequest);
 server.listen(PORT, function(){
     console.log("Sever started on %s", PORT);
 });
+
