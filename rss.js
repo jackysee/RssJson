@@ -85,6 +85,9 @@ module.exports = {
                //obj.created = Date.parse(val.pubDate[0]);
                obj.pubDate = val.pubDate[0];
              }
+             if (val['content:encoded']) {
+               obj.content = val['content:encoded'];
+             }
              if (val['media:content']) {
                obj.media = val.media || {};
                obj.media.content = val['media:content'];
