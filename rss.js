@@ -48,7 +48,7 @@ module.exports = {
                 else{
                   console.log("Error", error);
                   callback(new Error(
-                      'Error loading feed' + 
+                      'Error loading feed' +
                       ((response && response.statusCode)?  (' : ' + response.statusCode) : '')
                   ));
                   this.emit('error', new Error('Bad status code'));
@@ -102,6 +102,9 @@ module.exports = {
              }
              if (val['itunes:duration']){
                  obj.duration = val['itunes:duration'][0];
+             }
+             if (val['itunes:summary']){
+                 obj.summary = val['itunes:summary'][0];
              }
              if(val.enclosure){
                 if(!util.isArray(val.enclosure)){
